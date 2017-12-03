@@ -83,6 +83,12 @@ jQuery(document).ready(function($){
     $('body').scrollspy({ 
         target: '.navbar-collapse',
         offset: 95
-    })      
-});
+    });
 
+    // Ivo - jQuery UI DatePicker functionality
+    $("#reg-birthdate").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "-100:+0",
+    });
+});

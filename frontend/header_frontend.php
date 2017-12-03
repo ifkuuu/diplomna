@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-
+    <link rel="stylesheet" href="css/jquery-ui.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -37,11 +37,15 @@
             <div class="col-md-8">
                 <div class="user-menu">
                     <ul>
+                    <?php if (isset($_SESSION['user_id'])): ?>
                         <li><a href="#"><i class="fa fa-user"></i> Моят профил</a></li>
                         <li><a href="#"><i class="fa fa-heart"></i> Любими</a></li>
                         <li><a href="#"><i class="fa fa-user"></i>Моята количка</a></li>
                         <li><a href="#"><i class="fa fa-user"></i> Checkout</a></li>
-                        <li><a href="#"><i class="fa fa-user"></i> Вход</a></li>
+                        <li><a href="logout.php"><i class="fa fa-user"></i> Изход</a></li>
+                    <?php else: ?>
+                        <li><a href="login.php"><i class="fa fa-user"></i> Вход</a></li>
+                    <?php endif; ?>
                     </ul>
                 </div>
             </div>

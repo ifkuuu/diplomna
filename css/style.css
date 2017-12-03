@@ -1052,3 +1052,8 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     max-width: 100%;
     /*border: 5px solid rebeccapurple;*/
 }
+
+.ivo-container h3, .ivo-submit-div, .ivo-showlogin{
+    text-align: center;
+    margin: 20px auto;
+}

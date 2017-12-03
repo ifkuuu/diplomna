@@ -12,10 +12,9 @@ $genders = $optionsService->getGenders();
             <div class="col-md-3 col-sm-6">
                 <div class="footer-about-us">
                     <h2>Ivo's<span> Abyss</span></h2>
-                    <p>Добре дошли в моята бездна! <br> Простете за името... искаше ми се да е нещо интересно и
-                        креативно, но явно до тука се изчерпват възможностите ми. Представлява проекта ми, с който смятам да се дипломирам, и по-точно
-                        електронен e-commerce магазин, който се надявам да направя на едно прилично ниво.<br>
-                        Благодаря за присъствието ви!
+                    <p>Добре дошли! <br>
+                        Този сайт е първият ми проект на php и въобще в програмирането.
+                        Идеята ми е да го ползвам като дипломна работа.
                     </p>
                     <div class="footer-social">
                         <a href="https://www.facebook.com/ifkuuu" target="_blank"><i class="fa fa-facebook"></i></a>
@@ -100,6 +99,9 @@ $genders = $optionsService->getGenders();
 
 <!-- jQuery easing -->
 <script src="js/jquery.easing.1.3.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="js/jquery-ui.js"></script>
 
 <!-- Main Script -->
 <script src="js/main.js"></script>

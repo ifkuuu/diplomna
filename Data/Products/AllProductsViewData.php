@@ -80,6 +80,4 @@ class AllProductsViewData
     {
         return $this->imageUrl;
     }
-
-
 }

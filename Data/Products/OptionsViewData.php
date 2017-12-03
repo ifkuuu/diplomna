@@ -77,7 +77,4 @@ class OptionsViewData
     {
         $this->sizes = $sizes();
     }
-
-
-
 }

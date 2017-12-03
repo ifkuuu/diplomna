@@ -10,11 +10,4 @@ if (isset($_POST['login'])) {
     }
 }
 var_dump($_SESSION);
-?>
-<h1>Login!</h1>
-
-<form method="post">
-    <input type="text" name="email"> <br>
-    <input type="text" name="password"> <br>
-    <input type="submit" name="login"> <br>
-</form>
+include_once "frontend/login_frontend.php";

@@ -109,7 +109,6 @@ class UserService implements UserServiceInterface
             $_SESSION['user_id'] = $user->getId();
             return true;
         }
-
         return false;
     }
 
