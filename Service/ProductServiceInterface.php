@@ -20,4 +20,6 @@ interface ProductServiceInterface
     public function getAllProductsViewData();
 
     public function getProductInfo(int $id);
+
+    public function search(string $searchText);
 }

@@ -1044,6 +1044,12 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     height: 310px;
     width: 400px;
 }
+.ivo-no-products {
+    display: block;
+    color: #1abc9c;
+    text-align: center;
+}
+
 #ivo-products .ivo-related-div img.ivo-related-image,
 #ivo-single-product .ivo-related-div .ivo-related-image
 {
@@ -1053,7 +1059,11 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     /*border: 5px solid rebeccapurple;*/
 }
 
-.ivo-container h3, .ivo-submit-div, .ivo-showlogin{
+.ivo-container h3, .ivo-submit-div, .ivo-showlogin, .ivo-search-title{
     text-align: center;
     margin: 20px auto;
+}
+
+#ivo-search {
+    width: 33%;
 }

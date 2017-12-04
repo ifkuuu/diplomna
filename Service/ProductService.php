@@ -393,4 +393,53 @@ class ProductService implements ProductServiceInterface
 
         return $relatedProducts;
     }
+
+    public function search(string $searchText)
+    {
+        $query = "  SELECT 
+                      pv.id as productVariantId,
+                      pv.price as price,
+                      pv.discount_price as discountedPrice,
+                      prod.name as productName,
+                      g.name as gender,
+                      pp.picture_path as imageUrl,
+                      b.name as brand
+                    FROM products prod
+                    JOIN product_variants pv on pv.product_id = prod.id
+                    JOIN genders g on g.id = pv.gender_id
+                    JOIN colours c on c.id = pv.colour_id
+                    JOIN sizes s on s.id = pv.size_id
+                    JOIN brands b on b.id = prod.brand_id
+                    JOIN sub_categories sc on sc.id = prod.sub_category_id
+                    JOIN product_pictures AS pp ON pp.product_id = prod.id
+                    WHERE
+                        prod.name like ?
+                        OR
+                        g.name like ?
+                        OR
+                        c.name like ?
+                        OR
+                        s.size like ?
+                        OR
+                        b.name like ?
+                        OR
+                        sc.name like ?
+                        ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+           "%{$searchText}%",
+           "%{$searchText}%",
+           "%{$searchText}%",
+           "%{$searchText}%",
+           "%{$searchText}%",
+           "%{$searchText}%"
+        ]);
+
+        $foundProducts = [];
+        while ($product = $stmt->fetchObject(AllProductsViewData::class)) {
+            $foundProducts[] = $product;
+        }
+        return $foundProducts;
+    }
 }

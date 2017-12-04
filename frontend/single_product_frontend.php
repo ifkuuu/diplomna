@@ -27,9 +27,9 @@ include_once "header_frontend.php";
                 <div class="col-md-4">
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Търси Продукти</h2>
-                        <form action="">
-                            <input type="text" placeholder="Какво търсиш днес?">
-                            <input type="submit" value="Търсене">
+                        <form action="search.php" method="post">
+                            <input type="text" placeholder="Какво търсиш днес?" name="search-text">
+                            <input type="submit" value="Търсене" name="search-submit">
                         </form>
                     </div>
 
