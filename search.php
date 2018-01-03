@@ -2,7 +2,6 @@
 require_once "app.php";
 /** @var  $queryString */
 
-$productService = new \Service\ProductService($db);
 $allProductsViewData = [];
 if (isset($_POST['search-submit'])) {
     $hasBeenSearched = true;

@@ -11,11 +11,65 @@ class User
 
     private $password;
 
-    //private $firstName;
+    private $firstName;
 
-    //private $lastName;
+    private $lastName;
 
-   // private $phone;
+    private $phone;
+
+    private $role;
+
+    private $birthDate;
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * @param mixed $birthDate
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeletedOn()
+    {
+        return $this->deletedOn;
+    }
+
+    /**
+     * @param mixed $deletedOn
+     */
+    public function setDeletedOn($deletedOn)
+    {
+        $this->deletedOn = $deletedOn;
+    }
+
+    private $deletedOn;
 
     /**
      * @return mixed
@@ -65,9 +119,9 @@ class User
         $this->password = $password;
     }
 
-/*    public function getFirstName()
+    public function getFirstName()
     {
-        return $this->firstName;
+        return htmlspecialchars($this->firstName);
     }
 
     public function setFirstName($firstName)
@@ -77,7 +131,7 @@ class User
 
     public function getLastName()
     {
-        return $this->lastName;
+        return htmlspecialchars($this->lastName);
     }
 
     public function setLastName($lastName)
@@ -93,5 +147,13 @@ class User
     public function setPhone($phone)
     {
         $this->phone = $phone;
-    }*/
+    }
+
+    public function isAdmin()
+    {
+        if ($this->getRole() === 'admin') {
+            return true;
+        }
+        return false;
+    }
 }

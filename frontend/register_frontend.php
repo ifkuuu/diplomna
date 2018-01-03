@@ -3,10 +3,15 @@ include_once "header_frontend.php";
 ?>
     <div class="container ivo-container">
         <div class="row">
-                <form method="post">
+                <form method="post" id="ivo-register-form">
                     <div id="customer_details" class="">
                         <h3>Регистрация</h3>
                         <div class="col-lg-12">
+                            <?php if (isset($errorMessage)): ?>
+                                <div class="ivo-has-error">
+                                    <?= $errorMessage ?>
+                                </div>
+                            <?php endif; ?>
                             <p>
                                 <label class="" for="reg-email">E-mail <abbr title="required" class="required">*</abbr>
                                 </label>
@@ -15,13 +20,13 @@ include_once "header_frontend.php";
                             <p>
                                 <label class="" for="reg-pass">Парола <abbr title="required" class="required">*</abbr>
                                 </label>
-                                <input type="text" id="reg-pass" name="password">
+                                <input type="password" id="reg-pass" name="password">
                             </p>
                             <p>
                                 <label class="" for="reg-confirmpass">Парола (повторно) <abbr title="required"
                                                                                               class="required">*</abbr>
                                 </label>
-                                <input type="text" id="reg-confirmpass" name="confirmPassword">
+                                <input type="password" id="reg-confirmpass" name="confirmPassword">
                             </p>
                             <p>
                                 <label class="" for="reg-firstname">Първо име<abbr title="required"

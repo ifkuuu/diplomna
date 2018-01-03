@@ -83,8 +83,7 @@ class UserService implements UserServiceInterface
     public function login($email, $password): bool
     {
         $query = "SELECT
-                   id,
-                   password
+                   id
                 FROM
                    users
                 WHERE
@@ -96,10 +95,12 @@ class UserService implements UserServiceInterface
             ]
         );
 
-        /**
-         * @var User $user
-         */
-        $user = $stmt->fetchObject(User::class);
+        $userId = $stmt->fetch()[0];
+        if (!$userId) {
+            return false;
+        }
+
+        $user = $this->loadUser($userId);
         if (!$user) {
             return false;
         }
@@ -119,5 +120,39 @@ class UserService implements UserServiceInterface
         $stmt->execute([$email]);
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
         return !!$result;
+    }
+
+
+    /**
+     * @param int $userId
+     * @return User|false Return the loaded User or false if not loaded properly.
+     */
+    public function loadUser(int $userId)
+    {
+        $query = "
+                SELECT
+						id,
+                  		email,
+                        password,
+                        first_name as firstName,
+                        last_name as lastName,
+                        phone,
+                        role,
+                        birth_date as birthDate,
+                        deleted_on as deletedOn
+                FROM
+                   users
+                WHERE
+                   id = ?
+        ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$userId]);
+
+        $user = $stmt->fetchObject(User::class);
+        if (!$user) {
+            return false;
+        }
+        return $user;
     }
 }

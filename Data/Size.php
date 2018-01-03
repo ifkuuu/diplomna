@@ -9,6 +9,8 @@ class Size
 
     private $size;
 
+    private $mainCategory;
+
     /**
      * @return int
      */
@@ -25,5 +27,11 @@ class Size
         return $this->size;
     }
 
-
+    /**
+     * @return mixed
+     */
+    public function getMainCategory()
+    {
+        return $this->mainCategory;
+    }
 }

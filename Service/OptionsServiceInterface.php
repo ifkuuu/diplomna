@@ -17,4 +17,5 @@ interface OptionsServiceInterface
 
     public function getColours();
 
+    public function getAllCities();
 }

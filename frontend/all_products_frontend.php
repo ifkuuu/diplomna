@@ -26,7 +26,7 @@ include_once "header_frontend.php";
     <div class="col-md-12">
         <div class="product-pagination text-center">
             <nav>
-                <?php if (isset($isSearch)): ?>
+<!--                --><?php //if (isset($isSearch)): ?>
                     <div class="single-sidebar">
                         <h2 class="sidebar-title ivo-search-title">Търси Продукти</h2>
                         <form action="search.php" method="post">
@@ -34,7 +34,7 @@ include_once "header_frontend.php";
                             <input type="submit" value="Търсене" name="search-submit">
                         </form>
                     </div>
-                <?php endif; ?>
+<!--                --><?php //endif; ?>
                 <?php if (!isset($isSearch)): ?>
                 <ul class="pagination" id="ivo-pagination">
                     <li>
@@ -108,7 +108,7 @@ include_once "header_frontend.php";
 
                         <div class="product-option-shop">
                             <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70"
-                               rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+                               rel="nofollow" href="cart.php?product=<?= $product->getProductVariantId() ?>">Добави в количката</a>
                         </div>
                     </div>
                 </div>

@@ -500,7 +500,7 @@ padding: 35px 0 180px;}
     padding: 7px 20px;
     text-transform: uppercase;border: 1px solid #1abc9c;
 }
-.newsletter-form input[type="submit"]:hover {background: #222;border-color: #666}
+.newsletter-form input[type="submit"]:hover, #btn-add-more-sizes {background: #222;border-color: #666}
 .newsletter-form {
     margin-top: 25px;
 }
@@ -606,7 +606,7 @@ input[type="submit"], button[type=submit] {
     text-transform: uppercase;
 }
 input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
-.single-sidebar input[type="text"] {
+.single-sidebar input[type="text"], input[type="password"] {
     margin-bottom: 10px;
     width: 100%;
 }
@@ -707,7 +707,7 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
 {
     border: 1px solid #1abc9c;
     padding: 5px;
-    width: 100px;
+    width: 150px;
     float: right;
 }
 .add_to_cart_button {
@@ -1066,4 +1066,85 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 
 #ivo-search {
     width: 33%;
+}
+
+.ivo-profile-sidebar ul {
+    border-right: 1px dashed #c5c5c5;
+
+    text-align: center;
+    list-style-type: none;
+}
+
+.ivo-profile-sidebar ul li {
+    border-bottom: 1px solid #f1f1f1;
+    padding: 10px 0;
+}
+
+.ivo-profile-sidebar ul li a {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding: 10px;
+}
+
+.ivo-profile-sidebar ul li a:hover {
+    text-decoration: none;
+}
+.ivo-profile-sidebar ul li:not(:first-child) a:hover,
+.ivo-profile-sidebar ul li:not(:first-child) a:focus,
+.ivo-selected {
+    text-decoration: none;
+    color: #f1f1f1;
+}
+
+.ivo-profile-sidebar ul li:not(:first-child):hover, .ivo-selected-li {
+    background-color: #1abc9c;
+}
+
+.ivo-profile-sidebar ul li:first-child {
+    background-color: #e9e9e9;
+    color: #17a78b;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px;
+}
+
+#btn-add-more-sizes, .ivo-btn {
+    margin: 5px 0;
+    background: #222;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    padding: 7px 20px;
+    text-transform: uppercase;
+    border: 1px solid #666;
+}
+
+#btn-add-more-sizes:hover, .ivo-btn:hover {
+    color: #1abc9c;
+    border: 1px solid #1abc9c;
+}
+
+#ivo-sizes-fieldset, .ivo-fieldset {
+    margin: 10px 0;
+}
+
+.ivo-has-error {
+    color: #a94442;
+}
+input.ivo-has-error {
+    color: #333333;
+    border-color: #a94442;
+}
+
+div.ivo-has-error {
+    margin: 20px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#billing_city_chosen .chosen-single {
+    padding: 10px;
+    height: 45px;
 }

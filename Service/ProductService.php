@@ -28,31 +28,31 @@ class ProductService implements ProductServiceInterface
 
     public function addProduct(string $name,
                                float $price,
-                               int $quantity,
+                               array $quantities,
                                int $categoryId,
                                int $subCategoryId,
                                int $brandId,
                                int $genderId,
-                               int $sizeId,
+                               array $sizesIDs,
                                int $colourId,
                                string $description = null,
-                               string $picturePath = null)
+                               array $picturesPaths = null)
     {
 
         $query = "INSERT INTO products (
-		            name,
-		            description,
-		            category_id,
-		            sub_category_id,
-		            brand_id	
-	            ) VALUES (
-		            ?,
-		            ?,
-		            ?,
-		            ?,
-		            ?
-                )
-        ";
+                name,
+                description,
+                category_id,
+                sub_category_id,
+                brand_id	
+            ) VALUES (
+                ?,
+                ?,
+                ?,
+                ?,
+                ?
+            )
+    ";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute(
@@ -67,7 +67,11 @@ class ProductService implements ProductServiceInterface
 
         $lastId = $this->db->lastInsertId();
 
-        $query = "INSERT INTO product_pictures (
+        // Insert images
+        if ($picturesPaths !== null) {
+            foreach ($picturesPaths as $picturePath) {
+
+                $query = "INSERT INTO product_pictures (
 		            product_id,
 		            colour_id,
 		            picture_path
@@ -78,16 +82,44 @@ class ProductService implements ProductServiceInterface
 	              )
 	    ";
 
-        $stmt = $this->db->prepare($query);
-        $stmt->execute(
-            [
-                $lastId,
-                $colourId,
-                $picturePath
-            ]
-        );
+                $stmt = $this->db->prepare($query);
+                $stmt->execute(
+                    [
+                        $lastId,
+                        $colourId,
+                        $picturePath
+                    ]
+                );
+            }
+        } else {
+            $query = "INSERT INTO product_pictures (
+		            product_id,
+		            colour_id,
+		            picture_path
+		          ) VALUES (
+		            ?,
+		            ?,
+		            DEFAULT 
+	              )
+	    ";
 
-        $query = "
+            $stmt = $this->db->prepare($query);
+            $stmt->execute(
+                [
+                    $lastId,
+                    $colourId,
+                ]
+            );
+        }
+
+
+        foreach ($sizesIDs as $key => $sizeId) {
+
+            if ($quantities[$key] < 1) {
+                $quantities[$key] = 1;
+            }
+
+            $query = "
             INSERT INTO product_variants (
                 product_id, size_id, gender_id, colour_id, stock, price
             ) VALUES (
@@ -95,15 +127,16 @@ class ProductService implements ProductServiceInterface
             )
         ";
 
-        $stmt = $this->db->prepare($query);
-        $stmt->execute([
-            $lastId,
-            $sizeId,
-            $genderId,
-            $colourId,
-            $quantity,
-            $price
-        ]);
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([
+                $lastId,
+                $sizeId,
+                $genderId,
+                $colourId,
+                $quantities[$key],
+                $price
+            ]);
+        }
     }
 
     public function getAllProductsViewData()
@@ -127,10 +160,12 @@ class ProductService implements ProductServiceInterface
                   JOIN products AS p ON p.id = pv.product_id
                   JOIN product_pictures AS pp ON pp.product_id = p.id
                   JOIN brands AS b ON b.id = p.brand_id 
+                  WHERE pv.stock >= 1
+                  AND p.deleted_on IS NULL
          ";
         $flag = 0;
         if (isset($_GET['gender'])) {
-            $query .= "WHERE pv.gender_id = ? ";
+            $query .= "AND pv.gender_id = ? ";
             $flag = 1;
         }
         if (isset($_GET['cat'])) {
@@ -205,7 +240,11 @@ class ProductService implements ProductServiceInterface
         ";
         $stmt = $this->db->prepare($query);
         $stmt->execute([$id]);
-        $product->setBrandInfo($stmt->fetchObject(Brand::class));
+        $obj = $stmt->fetchObject(Brand::class);
+        if ($obj === false) {
+            throw new \Exception("Такъв продукт не съществува!");
+        }
+        $product->setBrandInfo($obj);
 
         $query = "SELECT 
                       b.id, b.name as category
@@ -334,7 +373,8 @@ class ProductService implements ProductServiceInterface
 	                  p.name as name,
 	                  p.description as description,
 	                  pv.price as price,
-	                  pv.discount_price as discountedPrice
+	                  pv.discount_price as discountedPrice,
+	                  pv.stock as stock
                   FROM products AS p
                   JOIN product_variants AS pv ON p.id = pv.product_id
                   WHERE pv.id = ?";
@@ -347,6 +387,7 @@ class ProductService implements ProductServiceInterface
         $product->setDescription($result[0]['description']);
         $product->setPrice($result[0]['price']);
         $product->setDiscountedPrice($result[0]['discountedPrice']);
+        $product->setStock($result[0]['stock']);
 
         return $product;
     }
@@ -441,5 +482,79 @@ class ProductService implements ProductServiceInterface
             $foundProducts[] = $product;
         }
         return $foundProducts;
+    }
+
+    public function updateProductStock(int $id, int $quantity)
+    {
+        $query = "
+            UPDATE product_variants pv
+            SET pv.stock = ?
+            WHERE pv.id = ?
+        ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            $quantity,
+            $id
+        ]);
+
+        return true;
+    }
+
+    public function filterSizesByIdAndColour(int $productId, int $colourId)
+    {
+        $query = "
+                  SELECT 
+                      s.id, s.size as size
+                  FROM 
+                      sizes AS s
+                  JOIN product_variants AS pv ON pv.size_id = s.id
+                  JOIN products as p ON p.id = pv.product_id
+                  JOIN colours as c ON c.id = pv.colour_id
+                  WHERE p.id = (SELECT
+									p.id
+									FROM products as p
+									JOIN product_variants as pv ON pv.product_id = p.id 
+									WHERE pv.id = ?
+									AND c.id = ?)
+				  ORDER BY s.size
+				 ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$productId, $colourId]);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getVariantIdByColourAndSize(int $productVariantId, int $colourId, int $sizeId)
+    {
+
+        $query = "
+                  SELECT
+                      pv.id as id
+                  FROM products AS p
+                  JOIN product_variants AS pv ON p.id = pv.product_id
+                  JOIN colours c on c.id = pv.colour_id
+                  JOIN sizes s on s.id = pv.size_id
+                  WHERE c.id = ?
+                  AND s.id = ?
+                  AND p.id = (
+                              SELECT p.id
+                              FROM products as p
+                              JOIN product_variants as pv ON pv.product_id = p.id 
+                              AND pv.id = ?
+                              )
+						  ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(
+            [
+                $colourId,
+                $sizeId,
+                $productVariantId
+            ]
+        );
+
+        $resultId = $stmt->fetch()[0];
+        return $resultId;
     }
 }

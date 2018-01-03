@@ -2,9 +2,6 @@
 require_once "app.php";
 /** @var  $queryString */
 
-
-$productService = new \Service\ProductService($db);
-
 /* vrushta vsichki produkti i kolko nabroi stranici imame v posledniq si element*/
 /** @var \Data\Products\AllProductsViewData[] $allProductsViewData */
 $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;

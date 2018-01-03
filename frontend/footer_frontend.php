@@ -29,7 +29,6 @@ $genders = $optionsService->getGenders();
                     <ul>
                         <li><a href="">Моят профил</a></li>
                         <li><a href="">История на поръчките</a></li>
-                        <li><a href="">Любими</a></li>
                         <li><a href="">Начална страница</a></li>
                     </ul>
                 </div>
@@ -102,6 +101,16 @@ $genders = $optionsService->getGenders();
 
 <!-- jQuery UI -->
 <script src="js/jquery-ui.js"></script>
+
+<!-- jQuery Validate Plugin and Additional methods (such as for regex pattern) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+
+<!-- jQuery Fancy box library -->
+<script src="js/jquery.fancybox.min.js"></script>
+
+<!-- Chosen library -->
+<script src="js/chosen.jquery.min.js"></script>
 
 <!-- Main Script -->
 <script src="js/main.js"></script>

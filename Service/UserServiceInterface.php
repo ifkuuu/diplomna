@@ -15,4 +15,6 @@ interface UserServiceInterface
     );
 
     public function login($username, $password):bool ;
+
+    public function loadUser(int $userId);
 }

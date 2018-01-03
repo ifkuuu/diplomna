@@ -1,0 +1,2 @@
+RewriteEngine On
+ErrorDocument 404 /ivo/Diplomna/404.php

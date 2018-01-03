@@ -32,49 +32,6 @@ include_once "header_frontend.php";
                             <input type="submit" value="Търсене" name="search-submit">
                         </form>
                     </div>
-
-<!--                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Products</h2>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>
-                        </div>
-                    </div>-->
-
-<!--                    <div class="single-sidebar">-->
-<!--                        <h2 class="sidebar-title">Recent Posts</h2>-->
-<!--                        <ul>-->
-<!--                            <li><a href="">Sony Smart TV - 2015</a></li>-->
-<!--                            <li><a href="">Sony Smart TV - 2015</a></li>-->
-<!--                            <li><a href="">Sony Smart TV - 2015</a></li>-->
-<!--                            <li><a href="">Sony Smart TV - 2015</a></li>-->
-<!--                            <li><a href="">Sony Smart TV - 2015</a></li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
                 </div>
 
                 <div class="col-md-8">
@@ -94,14 +51,16 @@ include_once "header_frontend.php";
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="product-images">
+                                <div id="product-images" class="product-images">
                                     <div class="product-main-img">
-                                        <img src="<?= $product->getMainImage()->getImageUrl() ?>" alt="">
+                                        <img id="ivo-product-main-img" src="<?= $product->getMainImage()->getImageUrl() ?>" alt="">
                                     </div>
 
                                     <div class="product-gallery">
                                         <?php foreach ($images as $image): ?>
-                                        <img  class="ivo-related-image" src="<?= $image->getImageUrl() ?>" alt="">
+                                        <a href="<?= $image->getImageUrl() ?>" data-fancybox="gallery">
+                                            <img  class="ivo-related-image" src="<?= $image->getImageUrl() ?>" alt="">
+                                        </a>
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
@@ -118,73 +77,56 @@ include_once "header_frontend.php";
                                         <?php endif; ?>
                                     </div>
 
-                                    <form action="" class="cart">
-                                        <div class="sizes">
-                                            <label for="product-sizes">Избери размер  </label>
-                                            <select id="product-sizes" name="size">
-                                                    <option value="-1">- Размер -</option>
-                                                <?php foreach ($sizes as $size): ?>
-                                                    <option value="<?= $size->getId() ?>"><?= $size->getSize() ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
+                                    <form action="cart.php" method="post" class="cart">
                                         <div class="sizes">
                                             <label for="product-colours">Избери цвят  </label>
                                             <select id="product-colours" name="colour">
-                                                <option value="-1">- Цвят -</option>
+                                                <option value="-1">- Избери цвят -</option>
                                                 <?php foreach ($colours as $colour): ?>
-                                                    <option value="<?= $colour->getId() ?>"><?= $colour->getColour() ?></option>
+<!--                                                    --><?php //if ($colour->getId() != $product->getColourInfo()->getId()): ?>
+                                                        <option value="<?= $colour->getId() ?>"><?= $colour->getColour(); ?></option>
+<!--                                                    --><?php //endif; ?>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-
+                                        <div class="sizes">
+                                            <label for="product-sizes">Избери размер  </label>
+                                            <select id="product-sizes" name="size">
+<!--                                                <option value="--><?//= $product->getSizeInfo()->getId() ?><!--">--><?//= $product->getSizeInfo()->getSize() ?><!--</option>-->
+                                                <option value="-1">- Избери размер -</option>
+                                                <?php foreach ($sizes as $size): ?>
+                                                    <?php if ($size->getId() != $product->getSizeInfo()->getId()): ?>
+                                                        <option value="<?= $size->getId() ?>"><?= $size->getSize() ?></option>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
                                         <div class="quantity">
                                             <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                                         </div>
-                                        <button class="add_to_cart_button" type="submit">Добави в количката</button>
+                                        <button class="add_to_cart_button" type="submit" name="addToCart" value="<?= $product->getId(); ?>">Добави в количката</button>
                                     </form>
 
-<!--                                    <div class="product-inner-category">
-                                        <p>Category: <a href="">Summer</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. </p>
-                                    </div>-->
+                                    <?php if (isset($_SESSION['errorMessage'])): ?>
+                                        <div class="ivo-has-error">
+                                            <?= $_SESSION['errorMessage'] ?>
+                                        </div>
+                                    <?php unset($_SESSION['errorMessage']); endif; ?>
 
                                     <div role="tabpanel">
                                         <ul class="product-tab" role="tablist">
                                             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Описание</a></li>
-                                            <!--<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Оценки</a></li>-->
                                         </ul>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                                 <h2>Описание на продукта</h2>
                                                 <p><?= $product->getDescription() ?></p>
                                             </div>
-  <!--                                          <div role="tabpanel" class="tab-pane fade" id="profile">
-                                                <h2>Reviews</h2>
-                                                <div class="submit-review">
-                                                    <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                    <p><label for="email">Email</label> <input name="email" type="email"></p>
-                                                    <div class="rating-chooser">
-                                                        <p>Your rating</p>
-
-                                                        <div class="rating-wrap-post">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div>
-                                                    </div>
-                                                    <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                    <p><input type="submit" value="Submit"></p>
-                                                </div>
-                                            </div>-->
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="related-products-wrapper">
                             <h2 class="related-products-title">Подобни продукти</h2>
@@ -194,7 +136,7 @@ include_once "header_frontend.php";
                                     <div class="product-f-image ivo-related-div">
                                         <img class="ivo-related-image" src="<?= $relatedProduct->getMainImage()->getImageUrl() ?>" alt="">
                                         <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Добави</a>
+                                            <a href="cart.php?product=<?= $relatedProduct->getId()?>" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Добави</a>
                                             <a href="single_product.php?product=<?= $relatedProduct->getId() ?>" class="view-details-link"><i class="fa fa-link"></i> Виж детайли</a>
                                         </div>
                                     </div>

@@ -52,6 +52,24 @@ class Product
     /** @var  Colour[] */
     private $colours;
 
+    private $stock;
+
+    /**
+     * @return mixed
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
+
+    /**
+     * @param mixed $stock
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+    }
+
     /**
      * @return Colour[]
      */
@@ -68,8 +86,6 @@ class Product
         $this->colours = $colours();
     }
 
-
-
     /**
      * @return Size
      */
@@ -85,8 +101,6 @@ class Product
     {
         $this->size = $size;
     }
-
-
 
     /**
      * @return mixed
@@ -139,8 +153,6 @@ class Product
     {
         $this->discountedPrice = $discountedPrice;
     }
-
-
 
     /**
      * @return mixed

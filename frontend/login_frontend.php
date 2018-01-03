@@ -6,15 +6,20 @@ include_once "header_frontend.php";
             <div id="customer_details" class="">
                 <h3>Влизане в сайта</h3>
                 <div class="col-lg-12">
-                    <form method="post">
+                    <form method="post" id="ivo-login-form">
                         <p>
                             <label for="log-email">E-mail</label>
                             <input type="text" id="log-email" name="email">
                         </p>
                         <p>
                             <label for="log-pass">Парола</label>
-                            <input type="text" id="log-pass" name="password">
+                            <input type="password" id="log-pass" name="password">
                         </p>
+                        <?php if (isset($errorMessage)): ?>
+                            <div class="ivo-has-error">
+                                <?= $errorMessage ?>
+                            </div>
+                        <?php endif; ?>
                         <div class="ivo-submit-div">
                             <input type="submit" name="login" value="Вход">
                         </div>
@@ -23,7 +28,7 @@ include_once "header_frontend.php";
             </div>
         </div>
         <div class="ivo-showlogin">
-            Нямаш регистрация? <a href="register.php">Регистрирай се от тук.</a>
+            Нямате регистрация? <a href="register.php">Регистрирайте се от тук.</a>
         </div>
     </div>
 

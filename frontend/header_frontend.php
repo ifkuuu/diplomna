@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery.fancybox.css">
+    <link rel="stylesheet" href="css/chosen.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,10 +40,10 @@
                 <div class="user-menu">
                     <ul>
                     <?php if (isset($_SESSION['user_id'])): ?>
-                        <li><a href="#"><i class="fa fa-user"></i> Моят профил</a></li>
-                        <li><a href="#"><i class="fa fa-heart"></i> Любими</a></li>
-                        <li><a href="#"><i class="fa fa-user"></i>Моята количка</a></li>
-                        <li><a href="#"><i class="fa fa-user"></i> Checkout</a></li>
+                        <li><a href="user_profile.php"><i class="fa fa-user"></i>Моят профил</a></li>
+<!--                        <li><a href="#"><i class="fa fa-heart"></i> Любими</a></li>-->
+                        <li><a href="cart.php"><i class="fa fa-user"></i>Моята количка</a></li>
+<!--                        <li><a href="#"><i class="fa fa-user"></i> Checkout</a></li>-->
                         <li><a href="logout.php"><i class="fa fa-user"></i> Изход</a></li>
                     <?php else: ?>
                         <li><a href="login.php"><i class="fa fa-user"></i> Вход</a></li>
@@ -88,7 +90,7 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                    <a href="cart.php">Количка - <span class="cart-amunt"><?=  $_SESSION['totalCartAmount']?> лв.</span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><?= $_SESSION['totalItems'] ?></span></a>
                 </div>
             </div>
         </div>
@@ -108,11 +110,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="">Начало</a></li>
+                    <li><a href="#">Начало</a></li>
                     <li class="active"><a href="all_products.php">Всички продукти</a></li>
-                    <li><a href="">Single product</a></li>
-                    <li><a href="">Cart</a></li>
-                    <li><a href="">Checkout</a></li>
+<!--                    <li><a href="">Single product</a></li>-->
+                    <li><a href="cart.php">Количка</a></li>
+<!--                    <li><a href="">Checkout</a></li>-->
                     <li><a href="#">За нас</a></li>
                 </ul>
             </div>

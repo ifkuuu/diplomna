@@ -5,6 +5,7 @@ namespace Service;
 
 use Data\Brand;
 use Data\Category;
+use Data\City;
 use Data\Colour;
 use Data\Gender;
 use Data\Size;
@@ -60,7 +61,10 @@ class OptionsService implements OptionsServiceInterface
     {
         $query = "
             SELECT 
-                 id, size
+                 id,
+                 size,
+                 category_id AS mainCategory
+                
             FROM 
                 sizes
         ";
@@ -97,7 +101,9 @@ class OptionsService implements OptionsServiceInterface
     {
         $query = "
             SELECT 
-                id, name AS subCategory
+                id,
+                 name AS subCategory,
+                 category_id AS mainCategory
             FROM 
                 sub_categories
         ";
@@ -127,6 +133,22 @@ class OptionsService implements OptionsServiceInterface
 
         while ($colour = $stmt->fetchObject(Colour::class)) {
             yield $colour;
+        }
+    }
+
+    public function getAllCities()
+    {
+        $query = "SELECT
+                        id,
+                        city_name as name,
+                        post_code as postCode
+                    FROM cities
+                  ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        while ($city = $stmt->fetchObject(City::class)) {
+            yield $city;
         }
     }
 }

@@ -3,12 +3,13 @@ require_once "app.php";
 
 if (isset($_POST['add'])) {
     $imageUrl = null;
-    if ($_FILES['image']['error'] == 0) {
-        $uploadService = new \Service\Upload\UploadService();
-        $imageUrl = $uploadService->uploadImage($_FILES['image'], "images");
-    }
-    $productService = new \Service\ProductService($db);
-    $productService->addProduct(
+    try {
+        if ($_FILES['image']['error'][0] == 0) {
+            $uploadService = new \Service\Upload\UploadService();
+            $imageUrl = $uploadService->uploadMultipleImages($_FILES['image'], "images");
+        }
+        $productService = new \Service\ProductService($db);
+        $productService->addProduct(
             $_POST['name'],
             $_POST['price'],
             $_POST['quantity'],
@@ -20,7 +21,10 @@ if (isset($_POST['add'])) {
             $_POST['colour'],
             $_POST['description'],
             $imageUrl
-    );
+        );
+    } catch (Exception $e) {
+        $errorMessage =  $e->getMessage();
+    }
 }
 
 

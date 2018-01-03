@@ -9,6 +9,8 @@ class SubCategory
 
     private $subCategory;
 
+    private $mainCategory;
+
     /**
      * @return mixed
      */
@@ -24,4 +26,14 @@ class SubCategory
     {
         return $this->subCategory;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMainCategory()
+    {
+        return $this->mainCategory;
+    }
+
+
 }
