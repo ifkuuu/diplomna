@@ -32,4 +32,6 @@ interface ProductServiceInterface
      * @return mixed Returns the variant id corresponding to the above 3 params.
      */
     public function getVariantIdByColourAndSize(int $productVariantId, int $colourId, int $sizeId);
+
+    public function getNewestProductsViewData();
 }

@@ -39,7 +39,7 @@ include_once "header_frontend.php";
                 <ul class="pagination" id="ivo-pagination">
                     <li>
                         <a href="?page=1" aria-label="Previous">
-                            <span aria-hidden="true">1 &laquo;</span>
+                            <span aria-hidden="true"> &laquo;</span>
                         </a>
                     </li>
                     <?php if ($currentPage - 2 == 0): ?>
@@ -66,7 +66,7 @@ include_once "header_frontend.php";
                     <?php endif; ?>
                     <li>
                         <a href="?page=<?= $totalPages ?>" aria-label="Next">
-                            <span aria-hidden="true">&raquo; <?= $totalPages ?></span>
+                            <span aria-hidden="true">&raquo; <?/*= $totalPages */?></span>
                         </a>
                     </li>
                 </ul>
@@ -126,7 +126,7 @@ include_once "header_frontend.php";
                         <ul class="pagination" id="ivo-pagination">
                             <li>
                                 <a href="?page=1" aria-label="Previous">
-                                    <span aria-hidden="true">1 &laquo;</span>
+                                    <span aria-hidden="true"> &laquo;</span>
                                 </a>
                             </li>
                             <?php if ($currentPage - 2 == 0): ?>
@@ -158,7 +158,7 @@ include_once "header_frontend.php";
                             <?php endif; ?>
                             <li>
                                 <a href="?page=<?= $totalPages ?>" aria-label="Next">
-                                    <span aria-hidden="true">&raquo; <?= $totalPages ?></span>
+                                    <span aria-hidden="true">&raquo; <?/*= $totalPages */?></span>
                                 </a>
                             </li>
                         </ul>

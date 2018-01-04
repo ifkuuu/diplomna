@@ -41,7 +41,7 @@ include_once "header_frontend.php";
                                                 <label class="" for="billing_city">Град / Село <abbr title="required" class="required">*</abbr>
                                                 </label>
                                                 <select id="billing_city" name="city" class="chosen-select">
-                                                    <option disabled selected> - Избери - </option>
+                                                    <option disabled selected id="asdzz"> - Избери - </option>
                                                     <?php foreach ($cities as $city): ?>
                                                         <option value="<?= $city->getId() ?>"><?= $city->getName() ?> (п.к. <?= $city->getPostCode() ?> )</option>
                                                     <?php endforeach; ?>

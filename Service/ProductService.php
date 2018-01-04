@@ -18,6 +18,7 @@ class ProductService implements ProductServiceInterface
 
     const ITEMS_PER_PAGE = 8;
     const RELATED_PRODUCTS_LIMIT = 10;
+    const NUMBER_OF_NEWEST_ITEMS = 7;
 
     private $db;
 
@@ -556,5 +557,54 @@ class ProductService implements ProductServiceInterface
 
         $resultId = $stmt->fetch()[0];
         return $resultId;
+    }
+
+    public function getNewestProductsViewData()
+    {
+        // Custom function to replace only the last occurrence of a string.
+        function str_lreplace($search, $replace, $subject)
+        {
+            $pos = strrpos($subject, $search);
+
+            if($pos !== false)
+            {
+                $subject = substr_replace($subject, $replace, $pos, strlen($search));
+            }
+
+            return $subject;
+        }
+
+        $limit = self::NUMBER_OF_NEWEST_ITEMS;
+
+        $query = "SELECT id 
+                  FROM products 
+                  ORDER BY id DESC 
+                  LIMIT {$limit}";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        $resultIDsStr = "(";
+        while ($result = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $resultIDsStr .= intval($result['id']) . ", ";
+        }
+
+        $resultIDsStr = str_lreplace(', ', ')', $resultIDsStr);
+
+        $query = "SELECT pv.id
+                  FROM products as p
+                  JOIN product_variants as pv ON pv.product_id = p.id
+                  WHERE p.id IN {$resultIDsStr}
+                  GROUP BY p.id
+                  ORDER BY p.id DESC;
+                  ";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        $newestProducts = [];
+        while ($result = $stmt->fetch()) {
+            $newestProducts[] = $this->getProductInfo($result['id']);
+        }
+
+        return $newestProducts;
     }
 }

@@ -291,7 +291,6 @@ jQuery(document).ready(function($){
     sizesSelect.prop('disabled', true);
     $('#product-colours').on("change", function () {
         productId = getParameterByName('product');
-
         $(this).find('option:first').hide();
         $.ajax({
             url: 'ajax.php',
@@ -305,12 +304,12 @@ jQuery(document).ready(function($){
                 str = str.replace(/,\s*$/, "");
                 sizesSelect.find('option').hide();
                 sizesSelect.find(str).show();
+                sizesSelect.find('option:first').text('- Избери размер -');
             },
             complete: function () {
                 // Added a little delay, cause i think it helps with the bugged javascript loading.. not sure though.
                 setTimeout(function () {
                     sizesSelect.prop('disabled', false);
-                    sizesSelect.val("");
                 }, 500);
             },
         });
@@ -351,6 +350,8 @@ jQuery(document).ready(function($){
             },
         });
     });
+
+    /* ============================================================================================================== */
 
     // Adds Chosen library to this class.
     $(".chosen-select").chosen({disable_search_threshold: 10});

@@ -81,7 +81,7 @@ include_once "header_frontend.php";
                                         <div class="sizes">
                                             <label for="product-colours">Избери цвят  </label>
                                             <select id="product-colours" name="colour">
-                                                <option value="-1">- Избери цвят -</option>
+                                                <option value="-1" disabled selected> - <?= $product->getColourInfo()->getColour() ?> - </option>
                                                 <?php foreach ($colours as $colour): ?>
 <!--                                                    --><?php //if ($colour->getId() != $product->getColourInfo()->getId()): ?>
                                                         <option value="<?= $colour->getId() ?>"><?= $colour->getColour(); ?></option>
@@ -93,16 +93,16 @@ include_once "header_frontend.php";
                                             <label for="product-sizes">Избери размер  </label>
                                             <select id="product-sizes" name="size">
 <!--                                                <option value="--><?//= $product->getSizeInfo()->getId() ?><!--">--><?//= $product->getSizeInfo()->getSize() ?><!--</option>-->
-                                                <option value="-1">- Избери размер -</option>
+                                                <option value="-1" disabled selected> - <?= $product->getSizeInfo()->getSize() ?> - </option>
                                                 <?php foreach ($sizes as $size): ?>
-                                                    <?php if ($size->getId() != $product->getSizeInfo()->getId()): ?>
+<!--                                                    --><?php //if ($size->getId() != $product->getSizeInfo()->getId()): ?>
                                                         <option value="<?= $size->getId() ?>"><?= $size->getSize() ?></option>
-                                                    <?php endif; ?>
+<!--                                                    --><?php //endif; ?>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
                                         <div class="quantity">
-                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+                                            <input type="number" id="product-quantity" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                                         </div>
                                         <button class="add_to_cart_button" type="submit" name="addToCart" value="<?= $product->getId(); ?>">Добави в количката</button>
                                     </form>

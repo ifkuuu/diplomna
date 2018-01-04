@@ -84,7 +84,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="logo">
-                    <h1><a href="#">Ivo's<span>Abyss</span></a></h1>
+                    <h1><a href="index.php">Ivo's<span>Abyss</span></a></h1>
                 </div>
             </div>
 
@@ -110,12 +110,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Начало</a></li>
+                    <li><a href="index.php">Начало</a></li>
                     <li class="active"><a href="all_products.php">Всички продукти</a></li>
 <!--                    <li><a href="">Single product</a></li>-->
                     <li><a href="cart.php">Количка</a></li>
 <!--                    <li><a href="">Checkout</a></li>-->
-                    <li><a href="#">За нас</a></li>
+                    <li><a href="about.php">За нас</a></li>
                 </ul>
             </div>
         </div>

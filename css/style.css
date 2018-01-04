@@ -1148,3 +1148,7 @@ div.ivo-has-error {
     padding: 10px;
     height: 45px;
 }
+
+.brand-list img {
+    background-color: #fff;
+}
