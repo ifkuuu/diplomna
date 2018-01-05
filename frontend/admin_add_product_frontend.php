@@ -19,8 +19,17 @@ include_once "header_frontend.php";
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-
+                <div class="col-md-4  ivo-profile-sidebar">
+                    <ul class="ivo-profile-nav">
+                        <li>АДМИНИСТРАТИВНО МЕНЮ</li>
+                        <li class="ivo-selected-li"><a class="ivo-selected" href="admin_add_product.php">Добави продукт</a></li>
+                    </ul>
+                    <br>
+                    <ul class="ivo-profile-nav">
+                        <li>ПОТРЕБИТЕЛСКО МЕНЮ</li>
+                        <li><a href="user_profile.php">Моят профил</a></li>
+                        <li><a href="user_profile.php?orders=1">Моите поръчки</a></li>
+                    </ul>
                 </div>
                 
                 <div class="col-md-8">

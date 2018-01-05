@@ -27,7 +27,7 @@ if (strpos($URI, 'admin_') && isset($_SESSION['user_id'])) {
     unset($userService);
     if (!$user->isAdmin()) {
         unset($user);
-       // header('HTTP/1.0 403 Forbidden');
+        // header('HTTP/1.0 403 Forbidden');
         include_once "frontend/404_frontend.php";
         exit();
     }

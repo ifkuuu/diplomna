@@ -106,13 +106,25 @@ jQuery(document).ready(function($){
 
     /* ============================================================================================================== */
 
+    // Sets the correct classes for highlighting li items on menus.
+
     // Ivo - add active class to header nav
     let ivoUrl = window.location.pathname;
+    let ivoHref = window.location.href;
     // Get just the file name (ex. search.php) and find an <a> with that href and add class 'active' to it.
     ivoUrl = ivoUrl.split('/');
+    ivoHref = ivoHref.split('/');
     ivoUrl = ivoUrl.slice(-1).pop();
+    ivoHref = ivoHref.slice(-1).pop();
+
     $(".nav li").removeClass("active");
     $('.nav li a[href="'+ivoUrl+'"]').parent('li').addClass("active");
+
+    ivoProfileUl = $(".ivo-profile-nav");
+    ivoProfileUl.find('li').removeClass("ivo-selected-li");
+    ivoProfileUl.find('li a').removeClass("ivo-selected");
+    ivoProfileUl.find('li a[href="'+ivoHref+'"]').addClass("ivo-selected");
+    ivoProfileUl.find('li a[href="'+ivoHref+'"]').parent('li').addClass("ivo-selected-li");
 
     /* ============================================================================================================== */
 
@@ -364,6 +376,14 @@ jQuery(document).ready(function($){
     //
     //     $('#ivo-product-main-img').attr('src', $(this).attr('href'));
     // });
+
+    /* ============================================================================================================== */
+
+    orderTable = $(".ivo-order-fieldset table");
+    orderTable.hide();
+    $(".ivo-order-fieldset").on("click", function () {
+        $(this).find('table').toggle();
+    });
 
     /* ============================================================================================================== */
 

@@ -1068,11 +1068,15 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     width: 33%;
 }
 
-.ivo-profile-sidebar ul {
+.ivo-profile-sidebar ul, .ivo-order-fieldset {
     border-right: 1px dashed #c5c5c5;
 
     text-align: center;
     list-style-type: none;
+}
+
+.ivo-order-fieldset li:hover {
+    cursor: pointer;
 }
 
 .ivo-profile-sidebar ul li {
@@ -1080,7 +1084,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     padding: 10px 0;
 }
 
-.ivo-profile-sidebar ul li a {
+.ivo-profile-sidebar ul li a, .ivo-orders-container ul li a {
     display: block;
     font-size: 16px;
     font-weight: bold;
@@ -1102,7 +1106,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     background-color: #1abc9c;
 }
 
-.ivo-profile-sidebar ul li:first-child {
+.ivo-profile-sidebar ul li:first-child, .ivo-order-fieldset li:first-child {
     background-color: #e9e9e9;
     color: #17a78b;
     font-size: 16px;

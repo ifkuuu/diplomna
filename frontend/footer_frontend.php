@@ -28,7 +28,7 @@ $genders = $optionsService->getGenders();
                     <h2 class="footer-wid-title">Потребителска навигация </h2>
                     <ul>
                         <li><a href="user_profile.php">Моят профил</a></li>
-                        <li><a href="">История на поръчките</a></li>
+                        <li><a href="user_profile.php?orders=1">История на поръчките</a></li>
                         <li><a href="index.php">Начална страница</a></li>
                     </ul>
                 </div>
