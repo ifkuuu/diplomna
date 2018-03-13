@@ -24,6 +24,11 @@ include_once "header_frontend.php";
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
+                <?php if (isset($_SESSION['msg'])): ?>
+                    <div class="ivo-success-msg">
+                        <?php echo $_SESSION['msg']; unset($_SESSION['msg']); ?>
+                    </div>
+                <?php endif; ?>
                 <div class="col-md-4">
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Търси Продукти</h2>
@@ -102,7 +107,7 @@ include_once "header_frontend.php";
                                             </select>
                                         </div>
                                         <div class="quantity">
-                                            <input type="number" id="product-quantity" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+                                           Количество &nbsp; <input type="number" id="product-quantity" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                                         </div>
                                         <button class="add_to_cart_button" type="submit" name="addToCart" value="<?= $product->getId(); ?>">Добави в количката</button>
                                     </form>

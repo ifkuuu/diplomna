@@ -26,6 +26,7 @@ include_once "header_frontend.php"
                     <ul class="ivo-profile-nav">
                         <li>АДМИНИСТРАТИВНО МЕНЮ</li>
                         <li><a href="admin_add_product.php">Добави продукт</a></li>
+                        <li class="ivo-selected-li"><a class="ivo-selected" href="admin_add_options.php">CMS</a></li>
                     </ul>
                     <br>
                 <?php endif; ?>

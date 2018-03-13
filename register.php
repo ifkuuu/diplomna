@@ -13,6 +13,8 @@ if (isset($_POST['register'])) {
             new DateTime($_POST['birthDate']),
             $_POST['phone']
         );
+        $_SESSION['msg'] = "Вие се регистрирахте успешно! Моля влезте в системата!";
+        sleep(2);
         header("Location: login.php");
         exit();
     } catch (Exception $e) {

@@ -46,7 +46,7 @@ class UserService implements UserServiceInterface
 
 
         if ($password !== $confirmPassword) {
-            throw new \Exception('Password mismatch');
+            throw new \Exception('Паролите не съвпадат');
         }
 
         // ==========================================================================

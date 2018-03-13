@@ -387,4 +387,49 @@ jQuery(document).ready(function($){
 
     /* ============================================================================================================== */
 
+   let optionAddBtn = $('<input type="button" value="добави нова стойност">');
+   optionAddBtn.one('click', function () {
+       let name = $(this).parent().find('select').attr('name');
+       name = name.replace('[]', '');
+       let categorySelectVal = $('#add_product_category_select option:selected').val();
+       if (name === 'size' && categorySelectVal === '-1') {
+           alert('Моля презаредете страницата и изберете категория преди да сменяте размери');
+           return;
+       }
+       if (name === 'size' || name === 'subCategory') {
+           $(this).parent().append($('<input type="text" data-category-id="' + categorySelectVal + '" name="new-' + name + '">'));
+           $(this).parent().append($('<input type="hidden" name="mainCatId" value="'+ categorySelectVal +'">'));
+       } else {
+           $(this).parent().append($('<input type="text" name="new-' + name + '">'));
+       }
+       addSaveBtn($(this));
+   });
+
+   let optionRedactBtn = $('<input type="button" value="редактирай">');
+   optionRedactBtn.one('click', function () {
+       let selectedOptionText = $(this).parent().find('select option:selected').text();
+       let name = $(this).parent().find('select').attr('name');
+       name = name.replace('[]', '');
+       let categorySelectVal = $('#add_product_category_select option:selected').val();
+       if (name === 'size' && categorySelectVal === '-1') {
+           alert('Моля презаредете страницата и изберете категория преди да сменяте размери');
+           return;
+       }
+       if (name === 'size' || name === 'subCategory') {
+           $(this).parent().append($('<input type="text" data-category-id="' + categorySelectVal + '" name="redact-' + name + '">').val(selectedOptionText));
+           $(this).parent().append($('<input type="hidden" name="mainCatId" value="'+ categorySelectVal +'">'));
+       } else {
+           $(this).parent().append($('<input type="text" name="redact-' + name + '">').val(selectedOptionText));
+       }
+       addSaveBtn($(this));
+   });
+   let optionParagraphs = $('#ivo-options-container p');
+
+   function addSaveBtn(theThis) {
+       let saveBtn = $('<input type="submit" name="saveBtn" value="запази">');
+       theThis.parent().append(saveBtn);
+   }
+   optionParagraphs.append(optionAddBtn);
+   optionParagraphs.append(optionRedactBtn);
+
 });

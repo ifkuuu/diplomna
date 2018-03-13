@@ -48,6 +48,7 @@ if (isset($_POST['place_order']) && !(isset($successfulOrder))) {
         $order = $ordersService->getOrder($orderId);
         $mailService = new \Service\Mail\MailService();
         $mailService->sendOrderInfoEmail($order);
+        $_SESSION['msg'] = "Усшешно направена поръчка!";
     } catch (Exception $e) {
         $errorMessage = $e->getMessage();
     }

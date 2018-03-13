@@ -151,4 +151,125 @@ class OptionsService implements OptionsServiceInterface
             yield $city;
         }
     }
+
+    public function redactColour($name, $id)
+    {
+        $query = "
+        UPDATE colours SET name = ? WHERE id = ?;
+        ";
+        $stmt = $this->db->prepare($query);
+        if (!$stmt->execute([$name, $id,])) {
+            throw new \Exception('Обновяванено не беше възможно!');
+        }
+        return true;
+    }
+
+    public function redactBrand($name, $id)
+    {
+        $query = "
+        UPDATE brands SET name = ? WHERE id = ?;
+        ";
+        $stmt = $this->db->prepare($query);
+        if (!$stmt->execute([$name, $id,])) {
+            throw new \Exception('Обновяванено не беше възможно!');
+        }
+        return true;
+    }
+
+    public function redactCategory($name, $id)
+    {
+        $query = "
+        UPDATE categories SET name = ? WHERE id = ?;
+        ";
+        $stmt = $this->db->prepare($query);
+        if (!$stmt->execute([$name, $id,])) {
+            throw new \Exception('Обновяванено не беше възможно!');
+        }
+        return true;
+    }
+
+    public function redactSize($name, $id)
+    {
+        $query = "
+        UPDATE sizes SET size = ? WHERE id = ?;
+        ";
+        $stmt = $this->db->prepare($query);
+        if (!$stmt->execute([$name, $id,])) {
+            throw new \Exception('Обновяванено не беше възможно!');
+        }
+        return true;
+    }
+
+    public function redactSubCategory($name, $id)
+    {
+        $query = "
+        UPDATE sub_categories SET name = ? WHERE id = ?;
+        ";
+        $stmt = $this->db->prepare($query);
+        if (!$stmt->execute([$name, $id,])) {
+            throw new \Exception('Обновяванено не беше възможно!');
+        }
+        return true;
+    }
+
+    public function addColour($name)
+    {
+        $query = "
+            INSERT INTO colours (name) VALUES (?);
+        ";
+        $stmt = $this->db->prepare($query);
+        if (!$stmt->execute([$name])) {
+            throw new \Exception('Добавянето не беше възможно!');
+        }
+        return true;
+    }
+
+    public function addBrand($name)
+    {
+        $query = "
+            INSERT INTO brands (name) VALUES (?);
+        ";
+        $stmt = $this->db->prepare($query);
+        if (!$stmt->execute([$name])) {
+            throw new \Exception('Добавянето не беше възможно!');
+        }
+        return true;
+    }
+
+    public function addCategory($name)
+    {
+        $query = "
+            INSERT INTO categories (name) VALUES (?);
+        ";
+        $stmt = $this->db->prepare($query);
+        if (!$stmt->execute([$name])) {
+            throw new \Exception('Добавянето не беше възможно!');
+        }
+        return true;
+    }
+
+    public function addSubCategory($name, $parentCategoryID)
+    {
+        $query = "
+            INSERT INTO sub_categories (name, category_id) VALUES (?, ?);
+        ";
+        $stmt = $this->db->prepare($query);
+        if (!$stmt->execute([$name, $parentCategoryID])) {
+            throw new \Exception('Добавянето не беше възможно!');
+        }
+        return true;
+    }
+
+    public function addSize($name, $parentCategoryId)
+    {
+        $query = "
+            INSERT INTO sizes (size, category_id) VALUES (?, ?);
+        ";
+        $stmt = $this->db->prepare($query);
+        if (!$stmt->execute([$name, $parentCategoryId])) {
+            throw new \Exception('Добавянето не беше възможно!');
+        }
+        return true;
+    }
+
 }

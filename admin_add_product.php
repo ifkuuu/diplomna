@@ -22,6 +22,7 @@ if (isset($_POST['add'])) {
             $_POST['description'],
             $imageUrl
         );
+        $_SESSION['msg'] = "Продуктът беше добавен успешно!";
     } catch (Exception $e) {
         $errorMessage =  $e->getMessage();
     }

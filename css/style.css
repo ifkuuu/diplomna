@@ -1142,6 +1142,15 @@ input.ivo-has-error {
     border-color: #a94442;
 }
 
+.ivo-success-msg {
+    background-color: #17a78b;
+    color: #f3f3f3;
+    text-align: center;
+    font-weight: bold;
+    margin: 10px 0 50px 0;
+    padding: 10px;
+}
+
 div.ivo-has-error {
     margin: 20px 0;
     font-size: 18px;

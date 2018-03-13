@@ -6,6 +6,11 @@ include_once "header_frontend.php";
             <div id="customer_details" class="">
                 <h3>Влизане в сайта</h3>
                 <div class="col-lg-12">
+                    <?php if (isset($_SESSION['msg'])): ?>
+                        <div class="ivo-success-msg">
+                            <?php echo $_SESSION['msg']; unset($_SESSION['msg']); ?>
+                        </div>
+                    <?php endif; ?>
                     <form method="post" id="ivo-login-form">
                         <p>
                             <label for="log-email">E-mail</label>

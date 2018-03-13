@@ -23,6 +23,7 @@ include_once "header_frontend.php";
 
 
 <div class="row">
+
     <div class="col-md-12">
         <div class="product-pagination text-center">
             <nav>
@@ -79,6 +80,11 @@ include_once "header_frontend.php";
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
+        <?php if (isset($_SESSION['msg'])): ?>
+            <div class="ivo-success-msg">
+                <?php echo $_SESSION['msg']; unset($_SESSION['msg']); ?>
+            </div>
+        <?php endif; ?>
         <div id="ivo-products" class="row">
             <?php if (empty($allProductsViewData) && isset($hasBeenSearched)) echo "<h3 class='ivo-no-products'>НЯМА НАМЕРЕНИ ПРОДУКТИ</h3>" ?>
             <?php $counter = 0; ?>

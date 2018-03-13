@@ -19,10 +19,17 @@ include_once "header_frontend.php";
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
+
+                <?php if (isset($_SESSION['msg'])): ?>
+                    <div class="ivo-success-msg">
+                        <?php echo $_SESSION['msg']; unset($_SESSION['msg']); ?>
+                    </div>
+                <?php endif; ?>
                 <div class="col-md-4  ivo-profile-sidebar">
                     <ul class="ivo-profile-nav">
                         <li>АДМИНИСТРАТИВНО МЕНЮ</li>
                         <li class="ivo-selected-li"><a class="ivo-selected" href="admin_add_product.php">Добави продукт</a></li>
+                        <li class="ivo-selected-li"><a class="ivo-selected" href="admin_add_options.php">CMS</a></li>
                     </ul>
                     <br>
                     <ul class="ivo-profile-nav">

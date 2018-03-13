@@ -30,6 +30,11 @@ include_once "header_frontend.php";
 
                                 <div id="customer_details" class="col2-set">
                                     <div class="col-1">
+                                        <?php if (isset($_SESSION['msg'])): ?>
+                                            <div class="ivo-success-msg">
+                                                <?php echo $_SESSION['msg']; unset($_SESSION['msg']); ?>
+                                            </div>
+                                        <?php endif; ?>
                                         <div class="woocommerce-billing-fields">
                                             <h3>Адрес за доставка</h3>
                                             <?php if (isset($errorMessage)): ?>

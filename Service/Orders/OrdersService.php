@@ -100,6 +100,7 @@ class OrdersService implements OrdersServiceInterface
                     id
                   FROM orders
                   WHERE user_id = ?
+                  ORDER BY created_on DESC
                   ";
         $stmt = $this->db->prepare($query);
         $stmt->execute([$userId]);

@@ -20,6 +20,11 @@ include_once "header_frontend.php";
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
+                <?php if (isset($_SESSION['msg'])): ?>
+                    <div class="ivo-success-msg">
+                        <?php echo $_SESSION['msg']; unset($_SESSION['msg']); ?>
+                    </div>
+                <?php endif; ?>
                 <div class="col-md-12">
                     <div class="product-content-right">
                         <div class="woocommerce">
@@ -27,8 +32,8 @@ include_once "header_frontend.php";
                                 <table cellspacing="0" class="shop_table cart">
                                     <thead>
                                         <tr>
-                                            <th class="product-remove">&nbsp;</th>
-                                            <th class="product-thumbnail">&nbsp;</th>
+                                            <th class="product-remove">Премахни продукт</th>
+                                            <th class="product-thumbnail">Снимка</th>
                                             <th class="product-name">Продукт</th>
                                             <th class="product-price">Цена</th>
                                             <th class="product-quantity">Количество</th>
